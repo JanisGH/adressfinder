@@ -1,14 +1,28 @@
-package com.adressfinder;
+package com.adressfinder.SearchLogistic;
 
 import java.util.Scanner;
 
 
 public class ScannerRequest {
     
-    System.out.println("Please enter an address to search for:");
 
-    Scanner stringScanner = new Scanner(System.in);
-    String adress = stringScanner.next();
+
+    public String scanForInstruction() {
+
+        System.out.println("Bitte gib eine Anweisung ein:");
+
+        Scanner stringScanner = new Scanner(System.in);
+        String result = stringScanner.next();
+
+
+        stringScanner.close();
+
+
+
+        return result;
+    }
+
+
 
 
 }
