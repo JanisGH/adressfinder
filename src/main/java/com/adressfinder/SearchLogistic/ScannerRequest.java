@@ -15,14 +15,24 @@ public class ScannerRequest {
         String result = stringScanner.next();
 
 
-        stringScanner.close();
 
 
 
         return result;
     }
 
+    public String scanForAPIKey() {
+
+        System.out.println("Bitte gib deinen API-Key ein:");
+
+        Scanner stringScanner = new Scanner(System.in);
+        String result = stringScanner.next();
 
 
+
+
+
+        return result;
+    }
 
 }

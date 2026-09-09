@@ -14,7 +14,9 @@ public class SearchService {
         String instruction = scannerRequest.scanForInstruction();
 
 
-        TavilyApi tavilyApi = new TavilyApi("your_api_key_here");
+        String apiKey = scannerRequest.scanForAPIKey();
+
+        TavilyApi tavilyApi = new TavilyApi(apiKey);
         String apiResponse = tavilyApi.callApi(instruction);
 
 

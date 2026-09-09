@@ -9,9 +9,9 @@ public class App {
 
         
         SearchService searchService = new SearchService();
-        searchService.process();
+        String result = searchService.process();
 
-
+        System.out.println(result);
 
     }
 
