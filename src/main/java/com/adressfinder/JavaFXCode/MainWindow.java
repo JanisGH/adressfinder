@@ -1,12 +1,12 @@
 package com.adressfinder.JavaFXCode;
 
 import com.adressfinder.ApiRequests.TavilyApi;
+import com.adressfinder.SearchLogistic.SearchLogic;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -23,28 +23,19 @@ public class MainWindow extends Application{
     @Override
     public void start(Stage stage) {
        
-        setup();
+        SearchLogic searchLogic = new SearchLogic();
 
+        setup();
 
         searchButton.setOnAction(event -> { //Gibt inputs weiter und kriegt output
 
             String instruction = inputField.getText();
             apiKey = apiKeyField.getText();
 
-
-            if (!(apiKey.startsWith("tvly-dev"))) {
-                resultField.setText("Ungültiger API-Key!");
-            } else {
-                TavilyApi tavilyApi = new TavilyApi(apiKey);
-                String apiResponse = tavilyApi.callApi(instruction);
-
-                resultField.setText(apiResponse);
-            }
-
+            String result = searchLogic.processInput(instruction, apiKey);
+            
+            resultField.setText(result);
         });
-
-
-
 
 
         VBox root = new VBox(searchButton, inputField, apiKeyField, resultField);
@@ -56,8 +47,8 @@ public class MainWindow extends Application{
         stage.show();
     }
 
-
-    private void setup() {
+    
+    public void setup() {
 
         searchButton = new Button("Suchen");
 
@@ -72,6 +63,4 @@ public class MainWindow extends Application{
 
     }
 
-    
-    
 }
