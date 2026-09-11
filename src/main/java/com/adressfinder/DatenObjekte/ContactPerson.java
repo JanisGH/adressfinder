@@ -1,5 +1,5 @@
 package com.adressfinder.DatenObjekte;
 
-public class ContacPerson {
+public class ContactPerson {
     
 }

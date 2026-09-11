@@ -28,7 +28,9 @@ public class ScannerRequest {
         Scanner stringScanner = new Scanner(System.in);
         String result = stringScanner.next();
 
-
+        if (!(result.startsWith("tvly-dev"))) {
+            return "Ungültiger API-Key!";
+        }
 
 
 

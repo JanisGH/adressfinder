@@ -1,18 +1,16 @@
 package com.adressfinder.MainLogistic;
 
-import com.adressfinder.SearchLogistic.SearchService;
+import com.adressfinder.JavaFXCode.MainWindow;
+
+import javafx.application.Application;
 
 public class App {
 
 
     public static void main(String[] args) {
-
         
-        SearchService searchService = new SearchService();
-        String result = searchService.process();
-
-        System.out.println(result);
-
+        Application.launch(MainWindow.class, args);
+        
     }
 
 }
