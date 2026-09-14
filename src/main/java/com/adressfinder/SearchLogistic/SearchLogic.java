@@ -1,25 +1,35 @@
 package com.adressfinder.SearchLogistic;
 
 import com.adressfinder.ApiRequests.TavilyApi;
+import com.adressfinder.ApiResponseSorter.TRToStringConverter;
+import com.adressfinder.ApiResponseSorter.TavilyResponse;
 
 
 public class SearchLogic {
 
-    public String processInput(String instruction, String apiKey) {
+    public TavilyResponse processInput(String instruction, String apiKey) {
 
+        TavilyResponse apiResponse = null;
 
             if (!(apiKey.startsWith("tvly-dev"))) {
-                return "Ungültiger API-Key!";
+                return null;
             } else {
+
                 TavilyApi tavilyApi = new TavilyApi(apiKey);
-                String apiResponse = tavilyApi.callApi(instruction);
+                
+                try {
+                    apiResponse = tavilyApi.search(instruction);
+                    
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+
+
+
+                    e.printStackTrace();
+                }
 
                 return apiResponse;
             }
 
     }
-
-
-
-
 }

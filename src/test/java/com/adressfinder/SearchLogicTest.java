@@ -3,6 +3,7 @@ package com.adressfinder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
+import com.adressfinder.ApiResponseSorter.TavilyResponse;
 import com.adressfinder.SearchLogistic.SearchLogic;
 
 
@@ -13,9 +14,9 @@ public class SearchLogicTest {
         //Arrange Act Assert
         SearchLogic searchLogic = new SearchLogic();
 
-        String result = searchLogic.processInput("LTA Legal & Tax Assekuranzmakler GmbH", "invalid-API-Key");
+        TavilyResponse result = searchLogic.processInput("LTA Legal & Tax Assekuranzmakler GmbH", "invalid-API-Key");
 
-        assertEquals("Ungültiger API-Key!", result);
+        assertEquals(null, result);
     }
 
 }

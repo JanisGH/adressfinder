@@ -1,11 +1,7 @@
 package com.adressfinder.ApiRequests;
 
-public class AiApi implements IApiCall {
+public class AiApi {
 
-    @Override
-    public String callApi(String address) {
-        // Implement the API call logic here
-        return null;
-    }
+    
     
 }

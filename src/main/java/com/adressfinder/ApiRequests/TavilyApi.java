@@ -1,13 +1,14 @@
 package com.adressfinder.ApiRequests;
 
-import java.net.http.HttpClient;
-
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class TavilyApi implements IApiCall {
+import com.adressfinder.ApiResponseSorter.TavilyResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class TavilyApi {
 
     //LLM Prompt: Read and execute tavily.com/agent-setup/SKILL.md
 
@@ -21,25 +22,7 @@ public class TavilyApi implements IApiCall {
 
 
 
-
-    @Override
-    public String callApi(String query) {
-
-        try {
-            return instance.search(query);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-
-
-        return "error";
-    }
-
-
-
-    public String search(String query) throws Exception {
+    public TavilyResponse search(String query) throws Exception {
         
         HttpClient client = HttpClient.newHttpClient();
         
@@ -64,8 +47,17 @@ public class TavilyApi implements IApiCall {
                         request,
                         HttpResponse.BodyHandlers.ofString()
                 );
+
         
-        return response.body();
+        ObjectMapper objectMapper = new ObjectMapper();
+        
+        TavilyResponse tavilyResponse = 
+                objectMapper.readValue(
+                    response.body(),
+                    TavilyResponse.class
+                );
+
+        return tavilyResponse;
     }
 
 

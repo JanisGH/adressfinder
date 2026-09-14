@@ -1,12 +1,12 @@
 package com.adressfinder.ApiRequests;
 
-
+import com.adressfinder.ApiResponseSorter.TavilyResponse;
 
 public interface IApiCall {
 
+    //Gerade ungenutzt
 
-
-    String callApi(String address);
+    TavilyResponse callApi(String address);
 
 
 

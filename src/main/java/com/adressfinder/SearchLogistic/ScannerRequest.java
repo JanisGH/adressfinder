@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class ScannerRequest {
     
-
+//Gerade ungenutzt
 
     public String scanForInstruction() {
 

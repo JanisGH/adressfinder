@@ -1,6 +1,7 @@
 package com.adressfinder.JavaFXCode;
 
-import com.adressfinder.ApiRequests.TavilyApi;
+import com.adressfinder.ApiResponseSorter.TavilyResponse;
+import com.adressfinder.ApiResponseSorter.TavilyResult;
 import com.adressfinder.SearchLogistic.SearchLogic;
 
 import javafx.application.Application;
@@ -16,29 +17,37 @@ public class MainWindow extends Application{
     private Button searchButton;
     private TextField inputField;
     private TextField apiKeyField;
-    private TextField resultField;
 
     private String apiKey;
+
+    TavilyResponse response = null;
     
     @Override
     public void start(Stage stage) {
+
+        
        
         SearchLogic searchLogic = new SearchLogic();
 
         setup();
 
-        searchButton.setOnAction(event -> { //Gibt inputs weiter und kriegt output
+        searchButton.setOnAction(event -> {
 
+            //Einlesen der Labels
             String instruction = inputField.getText();
             apiKey = apiKeyField.getText();
 
-            String result = searchLogic.processInput(instruction, apiKey);
+            //Verarbeitung der Eingaben
+            response = searchLogic.processInput(instruction, apiKey);
             
-            resultField.setText(result);
+            //Output result
+            printResult(response);
         });
 
 
-        VBox root = new VBox(searchButton, inputField, apiKeyField, resultField);
+    
+
+        VBox root = new VBox(searchButton, inputField, apiKeyField);
 
         Scene scene = new Scene(root, 500, 300);
 
@@ -47,8 +56,10 @@ public class MainWindow extends Application{
         stage.show();
     }
 
+
+
     
-    public void setup() {
+    private void setup() { //Setup der GUI Elemente
 
         searchButton = new Button("Suchen");
 
@@ -56,11 +67,30 @@ public class MainWindow extends Application{
         inputField.setPromptText("Input hier");
 
         apiKeyField = new TextField();
-        apiKeyField.setPromptText("API-Key hier");
-
-        resultField = new TextField();
-        resultField.setPromptText("Ergebnis hier");
+        apiKeyField.setPromptText("API-Key hier");  
 
     }
 
+
+    private void printResult(TavilyResponse response) { //Temporäre Methode für Ausgabe der response
+        
+
+        System.out.println("Suchanfrage:");
+        System.out.println(response.getQuery());
+
+        System.out.println("\nErgebnisse:");
+        
+        for (TavilyResult result : response.getResults()) {
+
+            System.out.println("Titel: " + result.getTitle());
+            System.out.println("URL: " + result.getUrl());
+            System.out.println("Content: " + result.getContent());
+            System.out.println("Score: " + result.getScore());
+
+            System.out.println("----------------------");
+
+
+    }
+
+}
 }
