@@ -1,7 +1,6 @@
 package com.adressfinder.SearchLogistic;
 
 import com.adressfinder.ApiRequests.TavilyApi;
-import com.adressfinder.ApiResponseSorter.TRToStringConverter;
 import com.adressfinder.ApiResponseSorter.TavilyResponse;
 
 
