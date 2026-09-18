@@ -14,7 +14,7 @@ public class SearchLogicTest {
         //Arrange Act Assert
         SearchLogic searchLogic = new SearchLogic();
 
-        TavilyResponse result = searchLogic.processInput("LTA Legal & Tax Assekuranzmakler GmbH", "invalid-API-Key");
+        TavilyResponse result = searchLogic.TavilyProcessInput("LTA Legal & Tax Assekuranzmakler GmbH", "invalid-API-Key");
 
         assertEquals(null, result);
     }

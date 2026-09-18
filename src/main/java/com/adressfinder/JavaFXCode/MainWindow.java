@@ -38,7 +38,7 @@ public class MainWindow extends Application{
             apiKey = apiKeyField.getText();
 
             //Verarbeitung der Eingaben
-            response = searchLogic.processInput(instruction, apiKey);
+            response = searchLogic.TavilyProcessInput(instruction, apiKey);
             
             //Output result
             printResult(response);

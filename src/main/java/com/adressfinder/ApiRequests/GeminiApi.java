@@ -5,6 +5,10 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+import com.adressfinder.ApiResponseSorter.TavilyResponse;
+import com.adressfinder.DatenObjekte.Company;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class GeminiApi {
 
     private final String apiKey;
@@ -13,7 +17,7 @@ public class GeminiApi {
         this.apiKey = apiKey;
     }
 
-    public String callApi(String prompt) throws Exception {
+    public Company callApi(String prompt) throws Exception {
 
         HttpClient client = HttpClient.newHttpClient();
 
@@ -33,7 +37,7 @@ public class GeminiApi {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(
-                        "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent"
+                        "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent"
                 ))
                 .header("x-goog-api-key", apiKey)
                 .header("Content-Type", "application/json")
@@ -46,6 +50,15 @@ public class GeminiApi {
                         HttpResponse.BodyHandlers.ofString()
                 );
 
-        return response.body();
+        ObjectMapper objectMapper = new ObjectMapper();
+        
+        Company company = 
+                objectMapper.readValue(
+                    response.body(),
+                    Company.class
+                );
+
+        return company;
     }
+
 }

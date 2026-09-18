@@ -1,12 +1,14 @@
 package com.adressfinder.SearchLogistic;
 
+import com.adressfinder.ApiRequests.GeminiApi;
 import com.adressfinder.ApiRequests.TavilyApi;
 import com.adressfinder.ApiResponseSorter.TavilyResponse;
+import com.adressfinder.DatenObjekte.Company;
 
 
 public class SearchLogic {
 
-    public TavilyResponse processInput(String instruction, String apiKey) {
+    public TavilyResponse TavilyProcessInput(String instruction, String apiKey) {
 
         TavilyResponse apiResponse = null;
 
@@ -29,6 +31,35 @@ public class SearchLogic {
 
                 return apiResponse;
             }
-
     }
+
+
+    public Company geminiProcessInput(String apiKey) {
+
+        Company company = null;
+
+        GeminiApi geminiApi = new GeminiApi(apiKey);
+
+        try {
+            company = geminiApi.callApi("Antworte nur mit: API funktioniert");
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
+
+
+        return company;
+    }
+
+
+
+
+
+
+
+
+
+
 }
